@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
+  isNavbarCollapsed: boolean;
+
   constructor() { }
 
   ngOnInit() {
+    this.isNavbarCollapsed = true;
+  }
+
+  search(searchTerm: string) {
+    // call search function in recipe component
   }
 
 }
