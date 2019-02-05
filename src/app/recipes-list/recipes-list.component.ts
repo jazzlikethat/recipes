@@ -14,7 +14,9 @@ import recipes from './recipes-list';
 export class RecipesListComponent implements OnInit {
 
   recipes: Recipe;
-  error: any
+  error: any;
+  fetchingRecipes: boolean = false;
+
   constructor(private recipesService: RecipesService,
               private router: Router,
               private route: ActivatedRoute) { }
@@ -28,9 +30,16 @@ export class RecipesListComponent implements OnInit {
       this.router.navigate(['/']);
       return;
     }
+
+    this.fetchingRecipes = true;
     this.recipesService.searchRecipes(searchTerm)
       .subscribe(
-        response => this.recipes = response['hits'], // success path
+        response => {
+          this.recipes = response['hits'];
+          setTimeout(() => {
+            this.fetchingRecipes = false;
+          }, 1000);
+        }, // success path
         error => this.error = error // error path
       );
     // this.recipes = recipes.hits;

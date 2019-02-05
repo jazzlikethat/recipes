@@ -1,5 +1,10 @@
-<div class="recipes-container">
+<div class="recipes-container" [hidden]="fetchingRecipes">
   <div class="recipe" *ngFor="let hit of recipes">
-    <div><img src="{{hit.recipe.image}}" alt="{{hit.recipe.label}}"></div>
+    <div class="image"><img src="{{hit.recipe.image}}" alt="{{hit.recipe.label}}"></div>
+    <div class="label"><label for="{{hit.recipe.label}}">{{hit.recipe.label}}</label></div>
   </div>
+</div>
+
+<div class="loader" [hidden]="!fetchingRecipes">
+  <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
 </div>
