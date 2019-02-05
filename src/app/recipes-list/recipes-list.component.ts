@@ -26,8 +26,4 @@ export class RecipesListComponent implements OnInit {
     this.recipes = recipes.hits;
   }
 
-  populateRecipes(recipes: any) {
-    this.recipes = recipes.hits;
-  }
-
 }

@@ -15,8 +15,4 @@ export class NavbarComponent implements OnInit {
     this.isNavbarCollapsed = true;
   }
 
-  search(searchTerm: string) {
-    // call search function in recipe component
-  }
-
 }

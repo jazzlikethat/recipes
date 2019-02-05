@@ -1,13 +1,14 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-  <a class="navbar-brand logo" (click)="isNavbarCollapsed = true">Recipes</a>
+  <a class="navbar-brand logo" (click)="isNavbarCollapsed = true" routerLink="/">Recipes</a>
   <button class="navbar-toggler navbar-toggler-right" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed"  [attr.aria-expanded]="!isNavbarCollapsed"aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="navbar-collapse" [ngbCollapse]="isNavbarCollapsed" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" (click)="isNavbarCollapsed = true">Home</a>
+      <!-- TODO active tab highlight -->
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" (click)="isNavbarCollapsed = true" routerLink="/">Home</a>
       </li>
     </ul>
   </div>
