@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { Recipe } from './recipe';
 import { RecipesService } from './recipes.service';
 
+import recipes from './recipes';
+
 @Component({
-  selector: 'app-recipes',
+  selector: 'app-recipes-container',
   templateUrl: './recipes.component.html',
   providers: [ RecipesService ],
   styleUrls: ['./recipes.component.scss']
 })
 export class RecipesComponent implements OnInit {
 
-  recipes: Recipe[];
+  recipes: any;
   constructor(private recipesService: RecipesService) { }
 
   ngOnInit() {
@@ -18,10 +19,15 @@ export class RecipesComponent implements OnInit {
   }
 
   search(searchTerm: string) {
-    if (searchTerm) {
-      this.recipesService.searchRecipes(searchTerm)
-        .subscribe(recipes => this.recipes = recipes);
-    }
+    // if (searchTerm) {
+    //   this.recipesService.searchRecipes(searchTerm)
+    //     .subscribe(recipes => this.populateRecipes(recipes));
+    // }
+    this.recipes = recipes.hits;
+  }
+
+  populateRecipes(recipes: any) {
+    this.recipes = recipes.hits;
   }
 
 }

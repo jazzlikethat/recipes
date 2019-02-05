@@ -1,3 +1,5 @@
-<p>
-  recipes works!
-</p>
+<div class="recipes-container">
+  <div class="recipe" *ngFor="let hit of recipes">
+    <div><img src="{{hit.recipe.image}}" alt="{{hit.recipe.label}}"></div>
+  </div>
+</div>

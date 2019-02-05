@@ -4,9 +4,7 @@ import { HttpHeaders } from '@angular/common/http';
 
 
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 
-import { Recipe } from './recipe';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -26,7 +24,7 @@ export class RecipesService {
   }
 
   /* GET recipes whose ingredients contains search term */
-  searchRecipes(term: string): Observable<Recipe[]> {
+  searchRecipes(term: string): Observable<[]> {
     term = term.trim();
 
     // Add safe, URL encoded search parameter if there is a search term
@@ -36,7 +34,7 @@ export class RecipesService {
                                 .set('app_key', 'e4019027cfe77cec1d9ef206cf815c9f')
     };
 
-    return this.http.get<Recipe[]>(this.recipesURL, options);
+    return this.http.get<[]>(this.recipesURL, options);
   }
 
 
