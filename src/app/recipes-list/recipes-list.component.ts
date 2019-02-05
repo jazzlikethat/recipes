@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { RecipesService } from './recipes-list.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
+import { RecipesService } from './recipes-list.service';
+import { Recipe } from './recipe';
 import recipes from './recipes-list';
 
 @Component({
@@ -11,19 +13,27 @@ import recipes from './recipes-list';
 })
 export class RecipesListComponent implements OnInit {
 
-  recipes: any;
-  constructor(private recipesService: RecipesService) { }
+  recipes: Recipe;
+  error: any
+  constructor(private recipesService: RecipesService,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.search('chicken');
+    this.search(this.route.snapshot.queryParams['search']);
   }
 
   search(searchTerm: string) {
-    // if (searchTerm) {
-    //   this.recipesService.searchRecipes(searchTerm)
-    //     .subscribe(recipes => this.populateRecipes(recipes));
-    // }
-    this.recipes = recipes.hits;
+    if (!searchTerm || searchTerm.trim() === '') {
+      this.router.navigate(['/']);
+      return;
+    }
+    this.recipesService.searchRecipes(searchTerm)
+      .subscribe(
+        response => this.recipes = response['hits'], // success path
+        error => this.error = error // error path
+      );
+    // this.recipes = recipes.hits;
   }
 
 }

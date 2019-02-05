@@ -15,7 +15,14 @@ export class RecipesSearchComponent implements OnInit {
   }
 
   onKeyUp(event: any) { // without type info
-    if (event.keyCode !== 13 || this.searchTerm.trim() === '') {
+    if (event.keyCode !== 13) {
+      return;
+    }
+    this.searchRecipes();
+  }
+
+  searchRecipes() {
+    if (this.searchTerm.trim() === '') {
       return;
     }
     this.router.navigate(['/recipes'], { queryParams: { search: this.searchTerm } });
