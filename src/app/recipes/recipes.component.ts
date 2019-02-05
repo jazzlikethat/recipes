@@ -9,7 +9,7 @@ import recipes from './recipes';
   providers: [ RecipesService ],
   styleUrls: ['./recipes.component.scss']
 })
-export class RecipesComponent implements OnInit {
+export class RecipesListComponent implements OnInit {
 
   recipes: any;
   constructor(private recipesService: RecipesService) { }
