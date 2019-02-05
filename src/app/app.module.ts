@@ -9,7 +9,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './navbar/navbar.component';
 
 import { RecipesSearchComponent } from './recipes-search/recipes-search.component';
-import { RecipesListComponent } from './recipes/recipes.component';
+import { RecipesListComponent } from './recipes-list/recipes-list.component';
 
 const appRoutes: Routes = [
   { path: 'recipes', component: RecipesListComponent },

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { RecipesService } from './recipes.service';
+import { RecipesService } from './recipes-list.service';
 
-import recipes from './recipes';
+import recipes from './recipes-list';
 
 @Component({
   selector: 'app-recipes-container',
-  templateUrl: './recipes.component.html',
+  templateUrl: './recipes-list.component.html',
   providers: [ RecipesService ],
-  styleUrls: ['./recipes.component.scss']
+  styleUrls: ['./recipes-list.component.scss']
 })
 export class RecipesListComponent implements OnInit {
 
