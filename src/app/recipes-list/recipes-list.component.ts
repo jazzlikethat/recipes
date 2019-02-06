@@ -54,7 +54,7 @@ export class RecipesListComponent implements OnInit {
           this.recipesDataService.setRecipesList(this.recipes);
           setTimeout(() => {
             this.fetchingRecipes = false;
-          }, 1000);
+          }, 300);
         }, // success path
         error => this.error = error // error path
       );

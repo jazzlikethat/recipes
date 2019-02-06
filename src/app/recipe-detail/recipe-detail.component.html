@@ -2,3 +2,19 @@
     <input type="text" class="form-control" [(ngModel)]="searchTerm" (keyup)="onKeyUp($event)" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
     <button type="button" class="btn btn-primary" (click)="searchRecipes()">Search Recipes</button>
 </div>
+
+<div class="recipe-detail">
+    <div>
+        <div class="image">
+            <img src="{{curRecipe.image}}" alt="{{curRecipe.label}}">
+        </div>
+        <div class="label">
+            <label for="{{curRecipe.label}}">
+                <b>{{curRecipe.label}}</b>
+            </label>
+        </div>
+    </div>
+    <div class="ingredients">
+        
+    </div>
+</div>

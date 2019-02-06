@@ -13,7 +13,7 @@ export class RecipeDetailComponent implements OnInit {
 
   searchTerm: string = "";
   recipesList: Recipe[];
-  curRecipe: object;
+  curRecipe: object = {};
 
   constructor(private router: Router,
               private recipesDataService: RecipesDataService) { }
@@ -26,7 +26,7 @@ export class RecipeDetailComponent implements OnInit {
       return;
     }
     let index = this.recipesDataService.getCurRecipeIndex();
-    this.curRecipe = this.recipesList[index];
+    this.curRecipe = this.recipesList[index]['recipe'];
   }
 
   onKeyUp(event: any) { // without type info
