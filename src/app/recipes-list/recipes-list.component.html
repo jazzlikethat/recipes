@@ -1,5 +1,10 @@
+<div class="search-container">
+    <input type="text" class="form-control" [(ngModel)]="searchTerm" (keyup)="onKeyUp($event)" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+    <button type="button" class="btn btn-primary" (click)="searchRecipes()">Search Recipes</button>
+</div>
+
 <div class="recipes-container" [hidden]="fetchingRecipes">
-  <div class="recipe" *ngFor="let hit of recipes">
+  <div class="recipe" *ngFor="let hit of recipes; index as i; trackBy: trackByFn" (click)="openRecipeDetail(i)">
     <div class="image"><img src="{{hit.recipe.image}}" alt="{{hit.recipe.label}}"></div>
     <div class="label"><label for="{{hit.recipe.label}}">{{hit.recipe.label}}</label></div>
   </div>

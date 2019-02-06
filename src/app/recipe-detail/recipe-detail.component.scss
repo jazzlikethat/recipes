@@ -1,0 +1,15 @@
+.search-container {
+    text-align: center;
+    background-color: #e6e6e6;
+    padding: 20px;
+
+    input.form-control {
+        display: inline-block;
+        width: 65%;
+    }
+
+    button {
+        margin-left: 15px;
+        margin-top: -5px;
+    }
+}

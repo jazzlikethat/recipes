@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { RecipesService } from './recipes-list.service';
+import { RecipesDataService } from '../recipes-data.service';
 import { Recipe } from './recipe';
 import recipes from './recipes-list';
 
@@ -13,29 +14,44 @@ import recipes from './recipes-list';
 })
 export class RecipesListComponent implements OnInit {
 
-  recipes: Recipe;
+  searchTerm: string = "";
+  recipes: Recipe[];
   error: any;
   fetchingRecipes: boolean = false;
 
   constructor(private recipesService: RecipesService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+              private recipesDataService: RecipesDataService,
+              private router: Router) { }
 
   ngOnInit() {
-    this.search(this.route.snapshot.queryParams['search']);
-  }
-
-  search(searchTerm: string) {
+    let searchTerm = this.recipesDataService.getSearchTerm();
     if (!searchTerm || searchTerm.trim() === '') {
       this.router.navigate(['/']);
       return;
     }
+    this.searchTerm = searchTerm;
+    this.searchRecipes();
+  }
 
+  onKeyUp(event: any) { // without type info
+    if (event.keyCode !== 13) {
+      return;
+    }
+    this.searchRecipes();
+  }
+
+  searchRecipes() {
+    if (!this.searchTerm || this.searchTerm.trim() === '') {
+      return;
+    }
+
+    this.recipesDataService.setSearchTerm(this.searchTerm);
     this.fetchingRecipes = true;
-    this.recipesService.searchRecipes(searchTerm)
+    this.recipesService.searchRecipes(this.searchTerm)
       .subscribe(
         response => {
           this.recipes = response['hits'];
+          this.recipesDataService.setRecipesList(this.recipes);
           setTimeout(() => {
             this.fetchingRecipes = false;
           }, 1000);
@@ -43,6 +59,11 @@ export class RecipesListComponent implements OnInit {
         error => this.error = error // error path
       );
     // this.recipes = recipes.hits;
+  }
+
+  openRecipeDetail(index: number) {
+    this.recipesDataService.setCurRecipeIndex(index);
+    this.router.navigate(['/recipeDetail']);
   }
 
 }

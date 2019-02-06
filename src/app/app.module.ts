@@ -3,19 +3,19 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
-
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './navbar/navbar.component';
-
+import { RecipesDataService } from './recipes-data.service';
 import { RecipesSearchComponent } from './recipes-search/recipes-search.component';
 import { RecipesListComponent } from './recipes-list/recipes-list.component';
+import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 
 const appRoutes: Routes = [
   { path: 'recipes', component: RecipesListComponent },
+  { path: 'recipeDetail', component: RecipeDetailComponent },
   { path: '', component: RecipesSearchComponent }
-  // { path: 'recipe', component: RecipeDetailComponent }
 ];
 
 @NgModule({
@@ -24,6 +24,7 @@ const appRoutes: Routes = [
     NavbarComponent,
     RecipesSearchComponent,
     RecipesListComponent,
+    RecipeDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +36,7 @@ const appRoutes: Routes = [
     ),
     NgbModule
   ],
-  providers: [],
+  providers: [RecipesDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
