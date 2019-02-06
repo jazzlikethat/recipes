@@ -1,3 +1,4 @@
 export interface Recipe {
-    // TODO
+    image: string,
+    label: string
 }

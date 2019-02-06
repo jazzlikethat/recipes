@@ -13,7 +13,7 @@ export class RecipeDetailComponent implements OnInit {
 
   searchTerm: string = "";
   recipesList: Recipe[];
-  curRecipe: object = {};
+  curRecipe: Recipe;
 
   constructor(private router: Router,
               private recipesDataService: RecipesDataService) { }
