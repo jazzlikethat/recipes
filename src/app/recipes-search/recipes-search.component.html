@@ -1,10 +1,35 @@
 <div class="search-container">
   <div class="child">
     <div class="input-container">
-      <input type="text" class="form-control" [(ngModel)]="searchTerm" (keyup)="onKeyUp($event)" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+      <input type="text" class="form-control" [(ngModel)]="searchTerm" (keyup)="onKeyUp($event)" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="Enter a recipe">
     </div>
     <div class="buttons-container">
       <button type="button" class="btn btn-primary" (click)="searchRecipes()">Search Recipes</button>
+    </div>
+    <div class="random-buttons">
+      <div class="header">
+        <span>Or choose something from below</span>
+      </div>
+      <div class="button-group one">
+          <button type="button" class="btn btn-light" (click)="searchRecipes('kale salad')">Kale Salad</button>
+          <button type="button" class="btn btn-light" (click)="searchRecipes('bean soup')">Bean Soup</button>
+          <button type="button" class="btn btn-light" (click)="searchRecipes('Frothy Indian Coffee')">Frothy Indian Coffee</button>
+      </div>
+      <div class="button-group two">
+          <button type="button" class="btn btn-light" (click)="searchRecipes('Mandarin Jam')">Mandarin Jam</button>
+          <button type="button" class="btn btn-light" (click)="searchRecipes('Pear Sorbet')">Pear Sorbet</button>
+      </div>
+      <div class="button-group three">
+          <button type="button" class="btn btn-light" (click)="searchRecipes('chocolate orange martini')">Chocolate Orange Martini</button>
+          <button type="button" class="btn btn-light" (click)="searchRecipes('Crispy Cheese Tacos Recipe')">Crispy Cheese Tacos Recipe</button>
+      </div>
+      <div class="button-group four">
+          <button type="button" class="btn btn-light" (click)="searchRecipes('Fresh Lemon Syrup Recipe')">Fresh Lemon Syrup Recipe</button>
+      </div>
+      <div class="button-group five">
+          <button type="button" class="btn btn-light" (click)="searchRecipes('Carrot Apple Juice')">Carrot Apple Juice</button>
+          <button type="button" class="btn btn-light" (click)="searchRecipes('Minted Fresh Peas')">Minted Fresh Peas</button>
+      </div>
     </div>
   </div>
 </div>

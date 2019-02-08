@@ -16,6 +16,38 @@
                 margin: 5px;
             }
         }
+
+        .random-buttons {
+            margin-top: 50px;
+
+            .header {
+                text-align: center;
+                font-style: italic;
+                font-size: 85%;
+                margin-bottom: 20px;
+            }
+
+            .button-group {
+                display: flex;
+                margin-bottom: 10px;
+            }
+
+            .one {
+                justify-content: space-around;
+            }
+
+            .two, .five {
+                justify-content: space-evenly;
+            }
+            
+            .three {
+                justify-content: space-between;
+            }
+
+            .four {
+                justify-content: center;
+            }
+        }
     }
 
 }

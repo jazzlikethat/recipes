@@ -24,7 +24,13 @@ export class RecipesSearchComponent implements OnInit {
     this.searchRecipes();
   }
 
-  searchRecipes() {
+  searchRecipes(term?: string) {
+    
+    // Sample button takes priority even if something is present in the search field
+    if (term) {
+      this.searchTerm = term;
+    }
+
     if (this.searchTerm.trim() === '') {
       return;
     }
