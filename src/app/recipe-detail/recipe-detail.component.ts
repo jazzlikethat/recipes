@@ -44,4 +44,8 @@ export class RecipeDetailComponent implements OnInit {
     this.router.navigate(['/recipes']);
   }
 
+  openTargetLink() {
+    window.open(this.curRecipe['url'], "_blank");
+  }
+
 }

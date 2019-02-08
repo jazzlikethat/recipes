@@ -19,8 +19,32 @@
     padding: 15px 10px;
     text-align: center;
 
-    .image, .label {
-        display: inline-block;
-        margin: 0 10px;
+    .image-container {
+        margin-bottom: 5px;
+
+        .image, .label {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .target-link {
+            font-weight: bold;
+            text-decoration: underline;
+            cursor: pointer;
+            color: #3333ff;
+        }
+    }
+
+    .ingredients-container {
+        margin-top: 5px;
+        .title {
+            font-size: 150%;
+            font-weight: bold;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
     }
 }

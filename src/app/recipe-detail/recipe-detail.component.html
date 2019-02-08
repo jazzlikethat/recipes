@@ -4,17 +4,25 @@
 </div>
 
 <div class="recipe-detail">
-    <div>
+    <div class="image-container">
         <div class="image">
-            <img src="{{curRecipe.image}}" alt="{{curRecipe.label}}">
+            <img src="{{curRecipe['image']}}" alt="{{curRecipe['label']}}">
         </div>
         <div class="label">
             <label for="{{curRecipe.label}}">
                 <b>{{curRecipe.label}}</b>
             </label>
+            <div>
+                <span>See full recipe on <span class="target-link" (click)="openTargetLink()">{{curRecipe['source']}}</span></span>
+            </div>
         </div>
     </div>
-    <div class="ingredients">
-        
+    <div class="ingredients-container">
+        <div class="title">
+            <span>Ingredients</span>
+        </div>
+        <ul>
+            <li *ngFor="let entry of curRecipe.ingredientLines">{{entry}}</li>
+        </ul>
     </div>
 </div>
