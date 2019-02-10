@@ -21,7 +21,7 @@ export class RecipesService {
   }
 
   /* GET recipes whose ingredients contains search term */
-  searchRecipes(term: string): Observable<[]> {
+  searchRecipes(term: string, startIndex: number): Observable<[]> {
     term = term.trim();
 
     // Add safe, URL encoded search parameter if there is a search term
@@ -29,6 +29,7 @@ export class RecipesService {
         params: new HttpParams().set('q', term)
                                 .set('app_id', '50f7cf31')
                                 .set('app_key', 'e4019027cfe77cec1d9ef206cf815c9f')
+                                .set('from', String(startIndex))
     };
 
     return this.http.get<[]>(this.recipesURL, options);

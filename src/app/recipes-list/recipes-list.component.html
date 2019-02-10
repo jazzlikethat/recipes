@@ -3,7 +3,10 @@
     <button type="button" class="btn btn-primary" (click)="searchRecipes()">Search Recipes</button>
 </div>
 
-<div class="recipes-container" [hidden]="fetchingRecipes">
+<div class="recipes-container" 
+  infiniteScroll
+  (scrolled)="onScroll()" 
+  [infiniteScrollDisabled]="infiniteScrollDisabled">
   <div class="recipe" *ngFor="let hit of recipes; index as i" (click)="openRecipeDetail(i)">
     <div class="image"><img src="{{hit.recipe.image}}" alt="{{hit.recipe.label}}"></div>
     <div class="label"><label for="{{hit.recipe.label}}">{{hit.recipe.label}}</label></div>

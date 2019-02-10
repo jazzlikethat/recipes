@@ -21,9 +21,12 @@ export class RecipesDataService {
         return this.curRecipeIndex;
     }
 
-    setRecipesList(recipes: Recipe[]) {
+    resetRecipesList(){
         this.recipesList.length = 0;
-        this.recipesList = [...recipes];
+    }
+
+    setRecipesList(recipes: Recipe[]) {
+        Array.prototype.push.apply(this.recipesList, recipes);
     }
 
     getRecipesList() {

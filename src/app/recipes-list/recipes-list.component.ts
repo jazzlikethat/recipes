@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { RecipesService } from './recipes-list.service';
 import { RecipesDataService } from '../recipes-data.service';
 import { Recipe } from './recipe';
-import recipes from './recipes-list';
+// import recipes from './recipes-list';
 
 @Component({
   selector: 'app-recipes-container',
@@ -15,9 +15,11 @@ import recipes from './recipes-list';
 export class RecipesListComponent implements OnInit {
 
   searchTerm: string = "";
-  recipes: Recipe[];
+  recipes: Recipe[] = [];
   error: any;
   fetchingRecipes: boolean = false;
+  infiniteScrollDisabled: boolean = true;
+  startIndex: number = 0;
 
   constructor(private recipesService: RecipesService,
               private recipesDataService: RecipesDataService,
@@ -45,25 +47,42 @@ export class RecipesListComponent implements OnInit {
       return;
     }
 
+    // For every new recipe search, reset all the variables
+    this.recipes.length = 0;
+    this.recipesDataService.resetRecipesList();
+    this.startIndex = 0;
+
+    this.fetchRecipes();
+  }
+
+  // call the api
+  fetchRecipes() {
     this.recipesDataService.setSearchTerm(this.searchTerm);
     this.fetchingRecipes = true;
-    this.recipesService.searchRecipes(this.searchTerm)
+    this.recipesService.searchRecipes(this.searchTerm, this.startIndex)
       .subscribe(
         response => {
-          this.recipes = response['hits'];
+          Array.prototype.push.apply(this.recipes, response['hits']);
+          this.infiniteScrollDisabled = !response['more'];
+          this.startIndex += 10;
           this.recipesDataService.setRecipesList(this.recipes);
-          setTimeout(() => {
-            this.fetchingRecipes = false;
-          }, 300);
+          this.fetchingRecipes = false;
         }, // success path
         error => this.error = error // error path
       );
-    // this.recipes = recipes.hits;
   }
 
   openRecipeDetail(index: number) {
     this.recipesDataService.setCurRecipeIndex(index);
     this.router.navigate(['/recipeDetail']);
+  }
+
+  onScroll() {
+    if (this.fetchingRecipes) {
+      return;
+    }
+
+    this.fetchRecipes();
   }
 
 }
