@@ -15,11 +15,12 @@ import { Recipe } from './recipe';
 export class RecipesListComponent implements OnInit {
 
   searchTerm: string = "";
-  recipes: Recipe[] = [];
-  error: any;
-  fetchingRecipes: boolean = false;
-  infiniteScrollDisabled: boolean = true;
+  recipes: Recipe[]  = [];
   startIndex: number = 0;
+
+  showAPIOverUsageWarning: boolean = false;
+  fetchingRecipes: boolean         = false;
+  infiniteScrollDisabled: boolean  = true;
 
   constructor(private recipesService: RecipesService,
               private recipesDataService: RecipesDataService,
@@ -56,33 +57,37 @@ export class RecipesListComponent implements OnInit {
   }
 
   // call the api
-  fetchRecipes() {
-    this.recipesDataService.setSearchTerm(this.searchTerm);
+  fetchRecipes(isScrollEvent?: boolean) {
+
+    if (this.fetchingRecipes) {
+      return;
+    }
+
     this.fetchingRecipes = true;
+    this.showAPIOverUsageWarning = false;
+    this.recipesDataService.setSearchTerm(this.searchTerm);
+
     this.recipesService.searchRecipes(this.searchTerm, this.startIndex)
       .subscribe(
-        response => {
+        response => { // success path
           Array.prototype.push.apply(this.recipes, response['hits']);
           this.infiniteScrollDisabled = !response['more'];
           this.startIndex += 10;
           this.recipesDataService.setRecipesList(this.recipes);
           this.fetchingRecipes = false;
-        }, // success path
-        error => this.error = error // error path
+        },
+        () => { // error path
+          this.fetchingRecipes = false;
+          if (!isScrollEvent) {
+            this.showAPIOverUsageWarning = true;
+          }
+        }
       );
   }
 
   openRecipeDetail(index: number) {
     this.recipesDataService.setCurRecipeIndex(index);
     this.router.navigate(['/recipeDetail']);
-  }
-
-  onScroll() {
-    if (this.fetchingRecipes) {
-      return;
-    }
-
-    this.fetchRecipes();
   }
 
 }

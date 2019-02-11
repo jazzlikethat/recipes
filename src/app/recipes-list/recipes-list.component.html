@@ -5,7 +5,7 @@
 
 <div class="recipes-container" 
   infiniteScroll
-  (scrolled)="onScroll()" 
+  (scrolled)="fetchRecipes(true)" 
   [infiniteScrollDisabled]="infiniteScrollDisabled">
   <div class="recipe" *ngFor="let hit of recipes; index as i" (click)="openRecipeDetail(i)">
     <div class="image"><img src="{{hit.recipe.image}}" alt="{{hit.recipe.label}}"></div>
@@ -15,4 +15,13 @@
 
 <div class="loader" [hidden]="!fetchingRecipes">
   <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+</div>
+
+<div class="error-message" [hidden]="!showAPIOverUsageWarning">
+  <div class="alert alert-warning" role="alert">
+    Could not fetch recipes.
+    <br>
+    <br>
+    The recipes are being fetched from Edamam which allows five requests per minute. Please try searching again after few seconds.
+  </div>
 </div>
